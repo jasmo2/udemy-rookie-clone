@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+User.delete_all
+Course.delete_all
+password = '12345678'
+prng = Random.new()
+for i in 1...10
+  User.create(id: i, username: Faker::Name.name, :email => Faker::Internet.email, password: password)
+  Course.create(id:i , name: Faker::App.name, description: Faker::Lorem.sentence(3, true, 4), owner: prng.rand(0...9))
+end
