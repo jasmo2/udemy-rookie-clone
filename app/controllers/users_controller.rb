@@ -5,16 +5,18 @@ class UsersController < ApplicationController
 			render "index"
 		else
 			# byebug
-			user = current_user
-			@courses = user.courses
+			@courses = Course.all
 			render "index_admin"
 		end
 	end
 	def new 	#get
 	end
 	def create 	#post
+
 	end
 	def show 	#get
+		user = current_user
+		@courses = user.admin_courses
 	end
 	def edit 	#get
 	end
@@ -23,4 +25,5 @@ class UsersController < ApplicationController
 	def destroy #delete
 		
 	end
+	
 end

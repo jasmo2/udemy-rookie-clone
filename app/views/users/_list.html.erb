@@ -1,0 +1,44 @@
+<div class="ui page grid">
+	<% if !@courses.blank? %>
+	<% @courses.map do |course|  %>
+		<%unless @current_user.creator?(course) %>
+			<div class="row">
+				<div class="column">
+					<h2 class="ui header"><%= course.name %></h2>
+					<p><%= course.description %></p>
+					<div class="ui column centered grid">
+						<%if @current_user.enrolled?(course) %>
+							<%= form_for :enrollment,html:{class:'column'}, url: enrollment_path(@current_user),
+							method: :delete do |f| %>
+								<%=f.hidden_field(:user_id, value:"#{current_user.id}")%>
+								<%=f.hidden_field(:course_id, value:"#{course.id}")%>
+								<button class="ui tiny orange button m-top-10">disincorporate »</button>
+							<%end%>
+						<%else%>
+							<%= form_for :enrollment,html:{class:'column'}, url: { controller: "enrollments",action: "create" } do |f| %>
+								<%=f.hidden_field(:user_id, value:"#{current_user.id}")%>
+								<%=f.hidden_field(:course_id, value:"#{course.id}")%>
+								<button class="ui tiny green button m-top-10">Enroll »</button>
+							<%end%>
+						<%end%>
+					</div>
+				</div>
+			</div>
+		<%end%>
+	<% end %>
+	<% else %>
+		<div class="row">
+			<div class="column">
+				<h2 class="ui header">You do not have any courses registered at your name</h2>
+				<p>if you want to register a new course tap the tab <strong>create</strong></p>
+			</div>
+		</div>
+	<% end %>
+
+	<div class="row">
+		<div class="column">
+			<div class="ui divider"></div>  
+			<span>© Jasmo2, 2015</span>
+		</div>
+	</div>
+</div>

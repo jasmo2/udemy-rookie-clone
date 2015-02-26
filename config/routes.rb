@@ -1,10 +1,20 @@
 Rails.application.routes.draw do
 
+  get 'courses/destroy'
+
+  get 'courses/create'
+
+  get 'courses/edit'
+
+  get 'courses/update'
+
   root to: 'users#index'
 
   devise_for :users, :singular => :user
-  scope "/admin" do
+  scope "/dashboard" do
     resources :users
+    resources :enrollments
+    resources :courses
   end
   # user GET    /users/:id(.:format)           users#show
   # The priority is based upon order of creation: first created -> highest priority.

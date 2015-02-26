@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: sessions
+# Table name: enrollments
 #
 #  id         :integer          not null, primary key
 #  user_id    :integer
@@ -9,10 +9,7 @@
 #  updated_at :datetime         not null
 #
 
-require 'test_helper'
-
-class SessionTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+class Enrollment < ActiveRecord::Base
+    belongs_to :user
+	belongs_to :course
 end
