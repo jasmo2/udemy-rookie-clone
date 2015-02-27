@@ -1,9 +1,4 @@
-<div class="ui tabular menu">
-	<%= link_to "All the courses", users_path, class: ' item' %>
-	<%= link_to "My List", user_path(@current_user), class: ' active item' %> 
-	<%= link_to "Create", users_path, class: 'item' %> 
-	<%= link_to "Update", users_path, class: 'item' %> 
-</div>
+<%= render 'header_admin' %>
 
 <div class="ui page grid">
 	<% if !@courses.blank? %>
@@ -12,23 +7,28 @@
 		<div class="column">
 			<h2 class="ui header"><%= course.name %></h2>
 			<p><%= course.description %></p>
-			<div class="ui column centered grid">
+			<div class="ui five column  grid">
 				<%= form_for :course,html:{class:'column'}, url: course_path(@current_user), method: :delete do |f| %>
-					<%=f.hidden_field(:user_id, value:"#{current_user.id}")%>
-					<%=f.hidden_field(:course_id, value:"#{course.id}")%>
+					<%=f.hidden_field(:id, value:"#{course.id}")%>
 					<button class="ui tiny red button m-top-10">Delete Course »</button>
 				<%end%>
+				<div class="column">
+					<%=link_to "Edit »", edit_course_path(course), class: "ui tiny pink button m-top-10"%>
+				</div>
+				<div class="column"></div>
+				<div class="column"></div>
+				<div class="column"></div>
 			</div>
 		</div>
 	</div>
 	<% end %>
 	<% else %>
-	<div class="row">
-		<div class="column">
-			<h2 class="ui header">You do not have any courses registered at your name</h2>
-			<p>if you want to register a new course tap the tab <strong>create</strong></p>
+		<div class="row">
+			<div class="column">
+				<h2 class="ui header">You do not have any courses registered at your name</h2>
+				<p>if you want to register a new course tap the tab <strong>create</strong></p>
+			</div>
 		</div>
-	</div>
 	<% end %>
 
 	<div class="row">

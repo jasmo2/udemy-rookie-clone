@@ -10,6 +10,8 @@ class UsersController < ApplicationController
 		end
 	end
 	def new 	#get
+		@current_user = current_user
+		@course = Course.new()
 	end
 	def create 	#post
 
@@ -19,6 +21,7 @@ class UsersController < ApplicationController
 		@courses = user.admin_courses
 	end
 	def edit 	#get
+
 	end
 	def update 	#put/patch
 	end

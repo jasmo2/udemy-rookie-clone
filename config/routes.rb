@@ -12,10 +12,13 @@ Rails.application.routes.draw do
 
   devise_for :users, :singular => :user
   scope "/dashboard" do
-    resources :users
+    resources :users, except: :edit
     resources :enrollments
     resources :courses
   end
+  
+  get '/dashboard/users/edit/:id' => 'users#edit', as: :edit_user
+
   # user GET    /users/:id(.:format)           users#show
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
